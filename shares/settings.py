@@ -36,6 +36,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'social.apps.django_app.default',
+    'portal',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -48,33 +50,66 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
+AUTHENTICATION_BACKENDS = (
+    'portal.weixin.WeixinOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
 ROOT_URLCONF = 'shares.urls'
+
+TEMPLATE_DIRS = (
+    os.path.join(BASE_DIR, 'templates'),
+)
+TEMPLATE_LOADERS = (
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
+
+SOCIAL_AUTH_WEIXIN_KEY = 'wx1f80e9a9a612e417'
+SOCIAL_AUTH_WEIXIN_SECRET = '32c1641e52e67c4f103d0353f4d858b6'
+SOCIAL_AUTH_WEIXIN_SCOPE = ['snsapi_userinfo',]
+
+LOGIN_URL = '/login'
+SOCIAL_AUTH_LOGIN_URL = '/login'
 
 WSGI_APPLICATION = 'shares.wsgi.application'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'static').replace('\\', '/')
+STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'assets/').replace('\\', '/'),
+)
+STATICFILES_FINDERS = (
+    'django.contrib.staticfiles.finders.FileSystemFinder',
+    'django.contrib.staticfiles.finders.AppDirectoriesFinder',
+)
 
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'shares',
+        'USER': 'root',
+        'PASSWORD': 'nameLR9969',
+        'HOST': 'localhost', 
+        'PORT': '3306',
     }
 }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
 USE_L10N = True
 
-USE_TZ = True
+#USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)

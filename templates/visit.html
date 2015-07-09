@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0'>
+
+    <title>神笔马良画股市</title>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}style/visit.css">
+</head>
+<body>
+    <div class="bg">
+        <div class="text">
+            <div class="text1">大盘震荡，深V调整，</div>
+            <div class="text2"><span>{{ username }}</span> 预测了{{ createon|date:"n月j日" }}的大盘走势：</div>
+        </div>
+        <img class="trend" src='{{ dataURL }}'/>
+        <div class="avatar"></div>
+        <div class="info">{{ info }}</div>
+        <button class="predict">我也来预测走势</button>
+    </div>
+    <div id="avatarData">{{ avatar }}</div>
+<script type="text/javascript" src="{{ STATIC_URL }}script/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}script/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}script/weixinshare.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}script/visit.js"></script>
+</body>
+</html>

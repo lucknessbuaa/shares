@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no'>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+
+    <title>神笔马良画股市</title>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}style/index.css">
+</head>
+<body>
+    <div class="container">
+        <button class="reset"></button>
+        <div class="reset-text">重画</div>
+        <canvas id="trend"></canvas>
+        <img class="pen" src="{{ STATIC_URL }}images/pen.png"></div>
+        <img class="tip" src="{{ STATIC_URL }}images/tip.png"></div>
+        <textarea class="idea" placeholder="告诉朋友你的预测理由吧"></textarea>
+        <button class="share">分享</button>
+        <button class="attention">关注公众号</button>
+    </div>
+    <div class="shareImg">
+    </div>
+<script type="text/javascript" src="{{ STATIC_URL }}script/jquery.min.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}script/jweixin-1.0.0.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}script/weixinshare.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}script/drawData.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}script/touchDraw.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}script/index.js"></script>
+</body>
+</html>

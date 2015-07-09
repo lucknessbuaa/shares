@@ -1,0 +1,93 @@
+body {
+    padding: 0px;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.bg {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    background: url('/static/images/visitbg.png')0 0 no-repeat;
+    background-size: 100% 100%;
+    overflow: hidden;
+    opacity: 0;
+}
+
+.text {
+    position: absolute;
+    top: 24.8%;
+    left: 7.34%;
+    color: #ffdc2d;
+    font-size: 16px;
+    line-height: 20px;
+    text-shadow: 0px 0px 10px #76241e;
+}
+
+.text2>span {
+    color: #fff;
+}
+
+img.trend {
+    position: absolute;
+    top: 46.13%;
+    left: 6.7%;
+    width: 87.03%;
+    height: 29.86%;
+}
+
+.avatar {
+    position: absolute;
+    top: 35.2%;
+    left: 6.25%;
+    height: 8%;
+    background-color: #ffdc2d;
+    border-radius: 30px;
+    border: 1px solid #ffdc2d;
+    background-size: 100% 100%;
+}
+
+.info {
+    position: absolute;
+    top: 35.5%;
+    left: 30%;
+    height: 7.5%;
+    width: 62.3%;
+    border: 0px;
+    padding: 0px;
+    padding-right: 3px;
+    padding-bottom: 3px;
+    color: #4b3b30;
+    font-size: 14px;
+    outline: none;
+    word-wrap: break-word;
+    word-break: break-all;
+    overflow: scroll;
+}
+
+button.predict {
+    position: absolute;
+    top: 83.73%;
+    left: 12.5%;
+    height: 7.94%;
+    width: 75%;
+    border: 0px;
+    padding: 0px;
+    border-radius: 10px;
+    background: -webkit-linear-gradient(90deg, #efb915 0%, #f3cf1f 100%);
+    box-shadow: 0px 0px 0px 0px rgba(255, 226, 93, 0.75);
+    color: #c33d12;
+    font-size: 20px;
+    font-weight: 800;
+    outline: none;
+}
+button.predict:active, button.predict:focus {
+    outline: none;
+    border: 0px;
+}
+
+#avatarData {
+    display: none;
+}
