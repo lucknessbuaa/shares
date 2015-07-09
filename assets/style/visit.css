@@ -23,7 +23,7 @@ body {
     color: #ffdc2d;
     font-size: 16px;
     line-height: 20px;
-    text-shadow: -4px -4px 4px #76241e, 4px -4px 4px #76241e, -4px 4px 4px #000, 4px 4px 4px #76241e;
+    text-shadow: -4px -4px 4px #76241e, 4px -4px 4px #76241e, -4px 4px 4px #76241e, 4px 4px 4px #76241e;
 }
 
 .text2>span {
