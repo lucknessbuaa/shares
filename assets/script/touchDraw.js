@@ -30,8 +30,6 @@ TouchDraw.prototype.draw = function(event) {
     if (pagex > this.minX && pagey > this.minY && pagey < this.maxY) {
         var x = pagex - this.leftDis;
         var y = pagey - this.topDis - this.canvas.height / 2;
-        console.log(pagex);
-        console.log(pagey);
 
         this.$pen.css({
             'position': 'absolute',

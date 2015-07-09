@@ -1,98 +1,109 @@
-function drawData(c, data, width, height) {
-    var min = parseFloat(data.min);
-    var max = parseFloat(data.max);
-    var distance = parseFloat(max - min);
-    var open = parseFloat(data.open);
+function DrawData(c, data, width, height) {
+    this.c = c;
+    this.min = parseFloat(data.min);
+    this.max = parseFloat(data.max);
+    this.distance = parseFloat(this.max - this.min);
+    this.openreal = parseFloat(data.open);
+    this.open = (this.max + this.min) / 2;
+    this.width = width;
+    this.height = height;
+    this.yestoday = data.yestoday;
+    this.today = data.today;
 
-    drawNumber(c, min, max, open, width, height);
-    drawYestodayData(c, data.yestoday, width, height, distance, open);
-    drawTodayData(c, data.today, width, height, distance, open);
+    this.init();
+}
 
-    var todayL = data.today.length;
-    var yestodayL = data.yestoday.length;
-    if(todayL === 0) {
-        return {
-            'width': 0.2 * 0.875,
-            'height': (open - parseFloat(data.yestoday[yestodayL - 1].data)) / distance
-        }
-    }else {
-        todayD = data.today[todayL - 1];
-        if(todayD.time >= 13) {
-            return {
-                'width': (0.6 + (parseFloat(todayD.time) - 13) * 0.2) * 0.875,
-                'height': (open - parseFloat(todayD.data)) / distance
-            }
-        }else {
-            return {
-                'width': (0.2 + (parseFloat(todayD.time) - 9.5) * 0.2) * 0.875,
-                'height': (open - parseFloat(todayD.data)) / distance
-            }
+DrawData.prototype.init = function() {
+    if (this.openreal >= this.max || this.openreal <= this.min) {
+        this.openreal = this.open;
+    }
+
+    this.drawNumber();
+    this.drawYestodayData();
+    this.drawTodayData();
+
+    var todayL = this.today.length;
+    var yestodayL = this.yestoday.length;
+    if (todayL === 0) {
+        this.returnWidth = 0.2 * 0.875,
+        this.returnHeight = (this.open - parseFloat(this.yestoday[yestodayL - 1].data)) / this.distance
+    } else {
+        todayD = this.today[todayL - 1];
+        if (todayD.time >= 13) {
+            this.returnWidth = (0.6 + (parseFloat(todayD.time) - 13) * 0.2) * 0.875,
+            this.returnHeight = (this.open - parseFloat(todayD.data)) / this.distance
+        } else {
+            this.returnWidth = (0.2 + (parseFloat(todayD.time) - 9.5) * 0.2) * 0.875,
+            this.returnHeight = (this.open - parseFloat(todayD.data)) / this.distance
         }
     }
 }
 
-function drawNumber(c, min, max, open, width, height) {
-    c.font = "10px";
-    c.fillStyle = '#ffffff';
-    c.fillText('' + open, 0, 0);
-    c.fillText('' + min, 0, height / 2);
-    c.fillText('' + max, 0, -height / 2 + 10);
+DrawData.prototype.drawNumber = function() {
+    this.c.font = "10px";
+    this.c.fillStyle = '#ffffff';
+
+    var y = (this.open - this.openreal) / this.distance * this.height;
+
+    this.c.fillText('' + this.openreal, 0, y);
+    this.c.fillText('' + this.min, 0, this.height / 2);
+    this.c.fillText('' + this.max, 0, -this.height / 2 + 10);
 }
 
-function drawTodayData(c, todayData, width, height, distance, open){
+DrawData.prototype.drawTodayData = function() {
     var x;
     var y;
     var time;
     var itemData;
-    c.beginPath();
-    
-    for(var i = 0; i < todayData.length; i++) {
-        time = parseFloat(todayData[i].time);
-        itemData = parseFloat(todayData[i].data);
-        
-        if(time >= 13){
-            x = width * (0.6 + (time - 13) * 0.2);
-        }else {
-            x = width * (0.2 + (time - 9.5) * 0.2);
-        }
-        y = (open - itemData) / distance * height;
+    this.c.beginPath();
 
-        if(i == 0) {
-            c.moveTo(x, y);
+    for (var i = 0; i < this.today.length; i++) {
+        time = parseFloat(this.today[i].time);
+        itemData = parseFloat(this.today[i].data);
+
+        if (time >= 13) {
+            x = this.width * (0.6 + (time - 13) * 0.2);
+        } else {
+            x = this.width * (0.2 + (time - 9.5) * 0.2);
+        }
+        y = (this.open - itemData) / this.distance * this.height;
+
+        if (i == 0) {
+            this.c.moveTo(x, y);
         }
 
-        c.lineTo(x, y);
+        this.c.lineTo(x, y);
     }
 
-    c.strokeStyle = "#ffe700";
-    c.stroke();
+    this.c.strokeStyle = "#ffe700";
+    this.c.stroke();
 }
 
-function drawYestodayData(c, yestodayData, width, height, distance, open) {
+DrawData.prototype.drawYestodayData = function() {
     var x;
     var y;
     var time;
     var itemData;
-    c.beginPath();
+    this.c.beginPath();
 
-    for(var i = 0; i < yestodayData.length; i++) {
-        time = parseFloat(yestodayData[i].time);
-        
-        if(time < 14) {
+    for (var i = 0; i < this.yestoday.length; i++) {
+        time = parseFloat(this.yestoday[i].time);
+
+        if (time < 14) {
             continue;
         }
 
-        itemData = parseFloat(yestodayData[i].data);
+        itemData = parseFloat(this.yestoday[i].data);
 
-        x = width * (time - 14) * 0.2;
-        y = (open - itemData) / distance * height;
+        x = this.width * (time - 14) * 0.2;
+        y = (this.open - itemData) / this.distance * this.height;
 
-        if(i == 0) {
-            c.moveTo(x, y);
+        if (i == 0) {
+            this.c.moveTo(x, y);
         }
-        c.lineTo(x, y);
+        this.c.lineTo(x, y);
     }
 
-    c.strokeStyle = "#ffffff";
-    c.stroke();
+    this.c.strokeStyle = "#ffffff";
+    this.c.stroke();
 }

@@ -34,8 +34,9 @@ input:-moz-placeholder { color:rgba(255, 255, 255, 0.9); }
     background-color: #90201d;
     outline: none;
 }
-button.reset:focus {
+button.reset:focus, button.reset:active {
     outline: none;
+    -webkit-filter: grayscale(50%);
 }
 
 .reset-text {
@@ -91,7 +92,7 @@ button.share, button.attention {
     padding: 0px;
     border-radius: 10px;
     background: -webkit-linear-gradient(90deg, #efb915 0%, #f3cf1f 100%);
-    box-shadow: 0px 0px 0px 0px rgba(255, 226, 93, 0.75);
+    box-shadow: 0px 2px 3px 1px #fbdb23;
     font-size: 21px;
     font-weight: 800;
     color: #c34410;
@@ -99,6 +100,7 @@ button.share, button.attention {
 }
 button.share:focus, button.share:active, button.attention:focus, button.attention:active {
     outline: none;
+    -webkit-filter: grayscale(50%);
 }
 
 button.share {

@@ -10,6 +10,7 @@ window.ontouchmove = preventDefault;
 $(function() {
     var canvas = $('#trend')[0];
     var drawDatacopy;
+    var drawData;
     var penPos;
     var minX;
     var touchDraw;
@@ -33,7 +34,11 @@ $(function() {
     $.get('/api/getData', function(data) {
         drawDatacopy = data;
 
-        penPos = drawData(c, data, width, height);
+        drawData = new DrawData(c, data, width, height);
+        penPos = {
+            'width': drawData.returnWidth,
+            'height': drawData.returnHeight
+        }
         var eleTop = (0.545 + penPos.height * 0.2986 - 0.02) * windowH;
         $('.pen').css({
             'position': 'absolute',
@@ -57,7 +62,7 @@ $(function() {
         c.translate(0, -height / 2);
         c.clearRect(0, 0, canvas.width, canvas.height);
         c.translate(0, height / 2);
-        penPos = drawData(c, drawDatacopy, width, height);
+        drawData = new DrawData(c, drawDatacopy, width, height);
         $('.pen').css({
             'position': 'absolute',
             'left': (0.0625 + penPos.width - 0.09) * windowW,

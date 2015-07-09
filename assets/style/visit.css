@@ -23,7 +23,7 @@ body {
     color: #ffdc2d;
     font-size: 16px;
     line-height: 20px;
-    text-shadow: 0px 0px 10px #76241e;
+    text-shadow: -4px -4px 4px #76241e, 4px -4px 4px #76241e, -4px 4px 4px #000, 4px 4px 4px #76241e;
 }
 
 .text2>span {
@@ -77,7 +77,7 @@ button.predict {
     padding: 0px;
     border-radius: 10px;
     background: -webkit-linear-gradient(90deg, #efb915 0%, #f3cf1f 100%);
-    box-shadow: 0px 0px 0px 0px rgba(255, 226, 93, 0.75);
+    box-shadow: 0px 2px 4px 2px #fbdb23;
     color: #c33d12;
     font-size: 20px;
     font-weight: 800;
@@ -86,6 +86,7 @@ button.predict {
 button.predict:active, button.predict:focus {
     outline: none;
     border: 0px;
+    -webkit-filter: grayscale(50%);
 }
 
 #avatarData {
