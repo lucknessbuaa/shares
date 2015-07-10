@@ -103,7 +103,7 @@ $(function() {
     });
 
     $('button.attention').click(function() {
-        location.href = '/';
+        location.href = 'http://mp.weixin.qq.com/s?__biz=MzA4MDA1Njk3NQ==&mid=206985325&idx=1&sn=c0befe1a38fecd9633b0f07555fa88f8&scene=1&from=groupmessage&isappinstalled=0#rd';
     });
 
     configWechat();
