@@ -7,6 +7,15 @@
 
     <title>神笔马良画股市</title>
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}style/visit.css">
+    <script>
+    var _hmt = _hmt || [];
+    (function() {
+          var hm = document.createElement("script");
+            hm.src = "//hm.baidu.com/hm.js?050eb572b47e4dfbfd95867a62d690c5";
+              var s = document.getElementsByTagName("script")[0]; 
+                s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
 </head>
 <body>
     <div class="bg">
@@ -16,7 +25,13 @@
         </div>
         <img class="trend" src='{{ dataURL }}'/>
         <div class="avatar"></div>
-        <div class="info">{{ info }}</div>
+        <div class="info">
+        {% if info %}
+        {{ info }}
+        {% else %}
+        听哥的，大盘绝对这样走！
+        {% endif %}
+        </div>
         <button class="predict">我也来预测走势</button>
     </div>
     <div id="avatarData">{{ avatar }}</div>

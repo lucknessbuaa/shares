@@ -89,7 +89,7 @@ DrawData.prototype.drawYestodayData = function() {
     for (var i = 0; i < this.yestoday.length; i++) {
         time = parseFloat(this.yestoday[i].time);
 
-        if (time < 14) {
+        if (time < 14 || time > 15) {
             continue;
         }
 
