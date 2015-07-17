@@ -31,7 +31,8 @@ $(function() {
     c.moveTo(0, 0);
     c.lineWidth = 2;
 
-    $.get('/api/getData', function(data) {
+    //$.get('/api/getData', function(data) {
+    $.get('/static/script/data.json', function(data) {
         drawDatacopy = data;
 
         drawData = new DrawData(c, data, width, height);
@@ -39,6 +40,9 @@ $(function() {
             'width': drawData.returnWidth,
             'height': drawData.returnHeight
         }
+        c.beginPath();
+        c.moveTo(windowW * penPos.width, height * penPos.height);
+        c.strokeStyle = "#ffe700";
         var eleTop = (0.545 + penPos.height * 0.2986 - 0.02) * windowH;
         $('.pen').css({
             'position': 'absolute',
@@ -53,58 +57,86 @@ $(function() {
 
         touchDraw = new TouchDraw(canvas, c, $('.pen'), $('.tip'), minX);
         touchDraw.init();
+        
+        var dataURL = canvas.toDataURL();
+        var info = $('.idea').text();
+        var id = $('#id').text();
+
+        $.post('/share/add', {
+            dataURL: dataURL,
+            info: info,
+            id: id
+        }).fail(function(e) {
+            console.log(e.responseText);
+        });
     }).fail(function(error) {
         console.log('获取数据失败！');
     });
 
     //reset canvas
     $('button.reset').click(function() {
+        $('.rank').velocity('fadeOut');
         c.translate(0, -height / 2);
         c.clearRect(0, 0, canvas.width, canvas.height);
         c.translate(0, height / 2);
         drawData = new DrawData(c, drawDatacopy, width, height);
+        c.beginPath();
+        c.strokeStyle = "#ffe700";
+        c.moveTo(windowW * penPos.width, height * penPos.height);
+        c.strokeStyle = "#ffe700";
         $('.pen').css({
             'position': 'absolute',
             'left': (0.0625 + penPos.width - 0.09) * windowW,
             'top': (0.545 + penPos.height * 0.2986 - 0.02) * windowH
         });
         touchDraw.minX = minX;
-    });
-
-    //share
-    $('button.share').click(function() {
+        
         var dataURL = canvas.toDataURL();
-        $('.shareImg').css('display', 'block');
-
-        var info = $('.idea').val();
+        var info = $('.idea').text();
+        var id = $('#id').text();
 
         $.post('/share/add', {
             dataURL: dataURL,
-            info: info
-        }, function(data) {
-            if (data.code === 0) {
-                configWechat({
-                    'link': 'http://' + window.location.hostname + '/share/' + data.id,
-                    'desc': '大盘震荡，深V调整，' + data.username + '预测了' + parseInt(data.dateM) + '月' +  parseInt(data.dateD)+ '日' + '的大盘走势'
-                });
-            } else if (data.code === 2002) {
-                window.location.href = '/login';
-            } else {
-                console.log('2001');
-            }
+            info: info,
+            id: id
         }).fail(function(e) {
-            console.log('error');
             console.log(e.responseText);
         });
     });
 
-    $('.shareImg').click(function() {
-        $(this).css('display', 'none');
-    });
-
     $('button.attention').click(function() {
-        location.href = 'http://mp.weixin.qq.com/s?__biz=MzA4MDA1Njk3NQ==&mid=206985325&idx=1&sn=c0befe1a38fecd9633b0f07555fa88f8&scene=1&from=groupmessage&isappinstalled=0#rd';
+        location.href = 'http://mp.weixin.qq.com/s?__biz=MzA4NDc2MTc5OA==&mid=209221798&idx=1&sn=b605c76be5fd45072ab7d625035b2f77&scene=1&key=c76941211a49ab581e5e40794cb11770a5f60abbc7290a9347ca8e7d2bede508865c0d7ccedf76c44a644aeaeddea2a8&ascene=1&uin=NDE4MDkwNjk1&devicetype=webwx&version=70000001&pass_ticket=FXej3lt2gVAQ50E%2FEEWSAeMiHg3YVPyy%2B%2FXdzLiDtg%2BdK9oVnfOASeXijf196ua3';
     });
 
-    configWechat();
+    configWechat({
+        'title': '我预测股市这么走，你也来画一手吧！',
+        'desc': 'A股大盘震荡，深V调整，一起来当神笔马良。' + $('#username').text() + '预测了' + $('#date').text() + '的大盘走势。。。',
+        'imgUrl': $('#avatar').text(),
+        'link': 'http://' + window.location.hostname + '/share/' + $('#id').text()
+    });
+
+    $('button.share').click(function() {
+        $('.shareImg').velocity("fadeIn");
+        $('.share_person').velocity("fadeIn", {
+            complete: function() {
+                $('.share_text').velocity("fadeIn");
+            }
+        });
+        
+        var dataURL = canvas.toDataURL();
+        var info = $('.idea').val();
+        var id = $('#id').text();
+        $.post('/share/add', {
+            info: info,
+            dataURL: dataURL,
+            id: id
+        }).fail(function(e) {
+            console.log(e.responseText);
+        });
+    });
+    $('.shareImg').click(function() {
+        $('.shareImg').velocity("fadeOut");
+        $('.share_person').velocity("fadeOut");
+        $('.share_text').velocity("fadeOut");
+    });
 })

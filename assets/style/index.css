@@ -4,10 +4,10 @@ body {
     overflow: hidden;
 }
 
-::-webkit-input-placeholder { color:rgba(255, 255, 255, 0.9); }
-::-moz-placeholder { color:rgba(255, 255, 255, 0.9); } 
-:-ms-input-placeholder { color:rgba(255, 255, 255, 0.9); }
-input:-moz-placeholder { color:rgba(255, 255, 255, 0.9); }
+::-webkit-input-placeholder { color:#681412; }
+::-moz-placeholder { color:#681412; } 
+:-ms-input-placeholder { color:#681412; }
+input:-moz-placeholder { color:#681412; }
 
 .container {
     position: absolute;
@@ -15,28 +15,22 @@ input:-moz-placeholder { color:rgba(255, 255, 255, 0.9); }
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url('/static/images/bg.png') 0 0 no-repeat;
+    background: url('/static/images/bg.jpg') 0 0 no-repeat;
     background-size: 100% 100%;
     overflow: hidden;
 }
 
 .reset {
     position: absolute;
-    top: 27%;
-    left: 8.75%;
-    width: 44px;
-    height: 44px;
+    top: 29%;
+    left: 9%;
+    width: 46px;
+    height: 46px;
     padding: 0px;
     border: 0px;
     background: url('/static/images/reset.png') center center no-repeat;
     background-size: 28px 28px;
-    border-radius: 22px;
-    background-color: #90201d;
     outline: none;
-}
-button.reset:focus, button.reset:active {
-    outline: none;
-    -webkit-filter: grayscale(50%);
 }
 
 .reset-text {
@@ -46,6 +40,11 @@ button.reset:focus, button.reset:active {
     font-size: 20px;
     margin-top: 13px;
     color: #fff;
+}
+
+button.reset:focus, button.reset:active {
+    outline: none;
+    -webkit-filter: grayscale(50%);
 }
 
 canvas#trend {
@@ -61,13 +60,6 @@ canvas#trend {
     z-index: 2000;
 }
 
-.tip {
-    position: absolute;
-    width: 56.25%;
-    left: 21.875%;
-    z-index: 2002;
-}
-
 textarea.idea {
     position: absolute;
     top: 75%;
@@ -79,7 +71,7 @@ textarea.idea {
     background-color: #90201d;
     border-radius: 10px;
     color: #fff;
-    font-size: 15px;
+    font-size: 18px;
     outline: none;
 }
 
@@ -87,15 +79,15 @@ button.share, button.attention {
     position: absolute;
     top: 89.6%;
     height: 7%;
-    width: 42%;
+    width: 40.3%;
     border: 0px;
     padding: 0px;
     border-radius: 10px;
-    background: -webkit-linear-gradient(90deg, #efb915 0%, #f3cf1f 100%);
-    box-shadow: 0px 2px 3px 1px #fbdb23;
-    font-size: 21px;
+    background: #ffe100;
+    //box-shadow: 0px 2px 3px 1px #fbdb23;
+    font-size: 20px;
     font-weight: 800;
-    color: #c34410;
+    color: #780000;
     outline: none;
 }
 button.share:focus, button.share:active, button.attention:focus, button.attention:active {
@@ -103,11 +95,11 @@ button.share:focus, button.share:active, button.attention:focus, button.attentio
     -webkit-filter: grayscale(50%);
 }
 
-button.share {
+button.attention {
     left: 6.25%;
 }
 
-button.attention {
+button.share {
     right: 6.25%;
 }
 
@@ -119,6 +111,121 @@ button.attention {
     height: 100%;
     background: url('/static/images/sharebg.png') 0 0 no-repeat;
     background-size: 100% 100%;
-    z-index: 2010;
+    z-index: 2020;
+}
+.shareImg .share_person {
+    position: absolute;
+    top: 8.13%;
+    width: 62.3%;
+    height: 37%;
+    left: 21.8%;
+}
+.shareImg .share_text {
+    position: absolute;
+    top: 53.8%;
+    left: 20.7%;
+    width: 56.7%;
+    height: 22.7%;
+}
+
+.rank {
     display: none;
+    position: absolute;
+    top: 39.584%;
+    left: 6.25%;
+    width: 87%;
+    z-index: 2010;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 10px;
+    padding: 20px 6px;
+    margin-left: -6px;
+}
+.rank-text1, .rank-text2{
+    color: #fff;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 14px;
+}
+.rank-text3 {
+    color: #fff;
+    text-align: center;
+    font-size: 15px;
+}
+.rank span {
+    color: #ffe100;
+}
+
+@media (max-width:330px){
+    .reset {
+        top:28%;
+        left: 7.9%;
+        background-size: 25px 25px;
+    }
+    .reset-text {
+        top: 28.3%;
+        left: 22%;
+        font-size: 16px;
+    }
+}
+@media (max-width: 390px) and (min-width: 330.1px){
+    .reset {
+        top: 29%;
+        left: 9%;
+        background-size: 28px 28px;
+    }
+    .reset-text {
+        top: 29%;
+        left: 22%;
+        font-size: 18px;
+    }
+}
+@media (max-width: 430px) and (min-width: 390.1px) {
+    .reset {
+        top: 29%;
+        left: 9.5%;
+        background-size: 32px 32px;
+    }
+    .reset-text {
+        top: 29%;
+        left: 22%;
+        font-size: 20px;
+    }
+}
+@media (max-width:360px){
+    .rank-text1, .rank-text2{
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+    .rank-text3{
+        font-size:10px;
+        line-height: 16px;
+    }
+}
+@media (max-width: 400px) and (min-width: 360.1px) {
+    .rank-text1, .rank-text2 {
+        font-size: 18px;
+        margin-bottom: 14px;
+    }
+    .rank-text3 {
+        font-size: 13px;
+        line-height: 15px;
+    }
+}
+@media (max-width: 430px) and (min-width: 400.1px){
+    .rank-text1, .rank-text2 {
+        font-size: 20px;
+        margin-bottom: 14px;
+    }
+    .rank-text3 {
+        font-size: 15px;
+        line-height: 20px;
+    }
+}
+@media (max-height: 600px) {
+    button.share, button.attention {
+        font-size: 15px;
+    }
+    textarea.idea {
+        font-size: 16px;
+    }
 }

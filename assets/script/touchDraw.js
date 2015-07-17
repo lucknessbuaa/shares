@@ -43,4 +43,32 @@ TouchDraw.prototype.draw = function(event) {
     }
 }
 
-TouchDraw.prototype.stopDraw = function(event) {}
+TouchDraw.prototype.stopDraw = function(event) {
+    var rankid = Math.floor(Math.random() * 5 + 1);
+    var credit;
+    if(rankid == 1) {
+        credit = Math.floor(Math.random() * 10 + 90); 
+    }else if(rankid == 2){
+        credit = Math.floor(Math.random() * 10 + 80); 
+    }else if(rankid == 3) {
+        credit = Math.floor(Math.random() * 20 + 60); 
+    }else if(rankid == 4) {
+        credit = Math.floor(Math.random() * 30 + 30); 
+    }else if(rankid == 5) {
+        credit = Math.floor(Math.random() * 20 + 10); 
+    }
+    $('#credit' + rankid).text(credit + '分');
+    $('#rank' + rankid).velocity("fadeIn");
+
+    var dataURL = this.canvas.toDataURL();
+    var info = $('.idea').val();
+    var id = $('#id').text();
+    
+    $.post('/share/add', {
+        dataURL: dataURL,
+        info: info,
+        id: id
+    }).fail(function(e){
+        console.log(e.responseText);
+    });
+}

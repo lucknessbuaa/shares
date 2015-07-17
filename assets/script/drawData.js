@@ -41,13 +41,14 @@ DrawData.prototype.init = function() {
 
 DrawData.prototype.drawNumber = function() {
     this.c.font = "10px";
-    this.c.fillStyle = '#ffffff';
+    this.c.fillStyle = '#90201d';
+    this.c.font = '400 10px Arial';
 
     var y = (this.open - this.openreal) / this.distance * this.height;
 
-    this.c.fillText('' + this.openreal, 0, y);
-    this.c.fillText('' + this.min, 0, this.height / 2);
-    this.c.fillText('' + this.max, 0, -this.height / 2 + 10);
+    this.c.fillText('' + this.openreal.toFixed(2), 0, y);
+    this.c.fillText('' + this.min.toFixed(2), 0, this.height / 2);
+    this.c.fillText('' + this.max.toFixed(2), 0, -this.height / 2 + 10);
 }
 
 DrawData.prototype.drawTodayData = function() {
@@ -75,7 +76,6 @@ DrawData.prototype.drawTodayData = function() {
         this.c.lineTo(x, y);
     }
 
-    this.c.strokeStyle = "#ffe700";
     this.c.stroke();
 }
 

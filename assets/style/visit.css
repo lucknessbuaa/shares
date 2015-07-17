@@ -10,7 +10,7 @@ body {
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url('/static/images/visitbg.png')0 0 no-repeat;
+    background: url('/static/images/visitbg.jpg')0 0 no-repeat;
     background-size: 100% 100%;
     overflow: hidden;
     opacity: 0;
@@ -18,43 +18,42 @@ body {
 
 .text {
     position: absolute;
-    top: 24.8%;
+    top: 26.5%;
     left: 7.34%;
-    color: #ffdc2d;
-    font-size: 16px;
-    line-height: 20px;
-    text-shadow: -4px -4px 4px #76241e, 4px -4px 4px #76241e, -4px 4px 4px #76241e, 4px 4px 4px #76241e;
+    color: #fff;
+    font-size: 14px;
 }
 
-.text2>span {
-    color: #fff;
+.text>span {
+    color: #ffe100;
 }
 
 img.trend {
     position: absolute;
-    top: 46.13%;
-    left: 6.7%;
+    top: 39.58%;
+    left: 6.25%;
     width: 87.03%;
     height: 29.86%;
+    background: transparent;
 }
 
 .avatar {
     position: absolute;
-    top: 35.2%;
-    left: 6.25%;
+    top: 76.5%;
+    left: 9%;
     height: 8%;
     background-color: #ffdc2d;
-    border-radius: 30px;
-    border: 1px solid #ffdc2d;
+    border-radius: 50px;
+    border: 2px solid #ffdc2d;
     background-size: 100% 100%;
 }
 
 .info {
     position: absolute;
-    top: 35.5%;
+    top: 77%;
     left: 30%;
-    height: 7.5%;
-    width: 62.3%;
+    height: 7.3%;
+    width: 62%;
     border: 0px;
     padding: 0px;
     padding-right: 3px;
@@ -69,16 +68,15 @@ img.trend {
 
 button.predict {
     position: absolute;
-    top: 83.73%;
-    left: 12.5%;
-    height: 7.94%;
-    width: 75%;
+    top: 88.6%;
+    left: 5.78%;
+    height: 6.94%;
+    width: 87.3%;
     border: 0px;
     padding: 0px;
     border-radius: 10px;
-    background: -webkit-linear-gradient(90deg, #efb915 0%, #f3cf1f 100%);
-    box-shadow: 0px 2px 4px 2px #fbdb23;
-    color: #c33d12;
+    background: #ffe100;
+    color: #780000;
     font-size: 20px;
     font-weight: 800;
     outline: none;
@@ -91,4 +89,16 @@ button.predict:active, button.predict:focus {
 
 #avatarData {
     display: none;
+}
+
+@media (max-width: 380px){
+    .text {
+        font-size: 12px;
+    }
+}
+
+@media (max-height: 600px){
+    button.predict{
+        font-size: 18px;
+    }
 }

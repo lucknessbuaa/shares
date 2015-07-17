@@ -22,9 +22,33 @@ def login(request):
     url = '/login/weixin?next=' + next
     return redirect(url)
 
-@login_required
+#@login_required
 def index(request):
-    return render(request, 'index.html') 
+    #user = request.user
+    user = User.objects.get(id=1)
+    social_user = UserSocialAuth.objects.get(user_id=user.id)
+    username = social_user.extra_data['username']
+    avatar = social_user.extra_data['profile_image_url']
+    
+    datenow = datetime.datetime.now()
+
+    if datenow.hour >= 15:
+        datenow = datenow + datetime.timedelta(days=1)
+    shares = Shares(user=user, imageurl='', info='', createon=datenow)
+    count = Shares.objects.count() 
+
+    try:
+        shares.save()
+    except:
+        redirect('/')
+
+    return render(request, 'index.html', {
+        'avatar': avatar,
+        'username': username,
+        'date': datenow,
+        'id': shares.id,
+        'count': count
+    }) 
 
 #@login_required
 def visit(request, id):
@@ -46,31 +70,13 @@ def visit(request, id):
 def addShare(request):
     dataURL = request.POST.get('dataURL', '')
     info = request.POST.get('info', '')
+    id = int(request.POST.get('id'))
 
-    if request.user and request.user.is_anonymous():
-        return render_json({
-            'code': 2002
-        })    
-    else:
-        user = request.user
+    shares = Shares.objects.get(id=id)
+    shares.info = info
+    shares.imageurl = dataURL
+    shares.save()
 
-    datenow = datetime.datetime.now()
-    if datenow.hour >= 15:
-        datenow = datenow + datetime.timedelta(days=1)
-    shares = Shares(user=user, imageurl=dataURL, info=info, createon=datenow)
-    
-    try:
-        shares.save()
-        num = shares.id
-    except:
-        return render_json({
-            'code': 2001
-        })
-    
     return render_json({
-        'code': 0,
-        'id': num,
-        'username': user.username,
-        'dateM': datenow.strftime('%m'),
-        'dateD': datenow.strftime('%d')
+        'code': 0
     })

@@ -20,10 +20,11 @@
 <body>
     <div class="bg">
         <div class="text">
-            <div class="text1">大盘震荡，深V调整，</div>
-            <div class="text2"><span>{{ username }}</span> 预测了{{ createon|date:"n月j日" }}的大盘走势：</div>
+            <span>{{ username }}</span> 预测了<span>{{ createon|date:"n月j日" }}</span>的大盘走势：
         </div>
-        <img class="trend" src='{{ dataURL }}'/>
+        {% if dataURL %}
+            <img class="trend" src='{{ dataURL }}'/>
+        {% endif %}
         <div class="avatar"></div>
         <div class="info">
         {% if info %}
@@ -32,7 +33,7 @@
         听哥的，大盘绝对这样走！
         {% endif %}
         </div>
-        <button class="predict">我也来预测走势</button>
+        <button class="predict">我也来预测</button>
     </div>
     <div id="avatarData">{{ avatar }}</div>
 <script type="text/javascript" src="{{ STATIC_URL }}script/jquery.min.js"></script>

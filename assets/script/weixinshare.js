@@ -31,7 +31,7 @@ function configWechat(shareData) {
 
 function configContent(shareData) {
     var title = '神笔马良画股市：大盘怎么走？你来画一手！';
-    var link = window.location.href.split('#')[0];
+    var link = 'http://' + window.location.hostname;
     var imgUrl = 'http://' + window.location.hostname + '/static/images/wechatshare.jpg';
     var desc = '小虎下战帖，诚邀各路英雄画线预测大盘。速来参战，看谁才是真正的神笔马良！';
 
