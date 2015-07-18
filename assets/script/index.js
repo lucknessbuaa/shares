@@ -31,6 +31,9 @@ $(function() {
     c.moveTo(0, 0);
     c.lineWidth = 2;
 
+    var eleTop;
+    var eleLeft;
+
     //$.get('/api/getData', function(data) {
     $.get('/static/script/data.json', function(data) {
         drawDatacopy = data;
@@ -43,15 +46,12 @@ $(function() {
         c.beginPath();
         c.moveTo(windowW * penPos.width, height * penPos.height);
         c.strokeStyle = "#ffe700";
-        var eleTop = (0.545 + penPos.height * 0.2986 - 0.02) * windowH;
+        eleTop = (0.545 + penPos.height * 0.2986 - 0.015) * windowH;
+        eleLeft = (0.0625 + penPos.width - 0.035) * windowW;
         $('.pen').css({
             'position': 'absolute',
-            'left': (0.0625 + penPos.width - 0.09) * windowW,
+            'left': eleLeft,
             'top': eleTop
-        });
-        $('.tip').css({
-            'position': 'absolute',
-            'top': eleTop + windowH * 0.1,
         });
         minX = (0.0625 + penPos.width) * windowW;
 
@@ -86,8 +86,8 @@ $(function() {
         c.strokeStyle = "#ffe700";
         $('.pen').css({
             'position': 'absolute',
-            'left': (0.0625 + penPos.width - 0.09) * windowW,
-            'top': (0.545 + penPos.height * 0.2986 - 0.02) * windowH
+            'left': eleLeft,
+            'top': eleTop
         });
         touchDraw.minX = minX;
         
@@ -139,4 +139,8 @@ $(function() {
         $('.share_person').velocity("fadeOut");
         $('.share_text').velocity("fadeOut");
     });
+
+    //pen animations
+    $('.circle1').velocity({opacity: 1}, {loop: true});
+    $('.circle2').velocity({scaleX: 1.8, scaleY: 1.8}, {loop: true});
 })
