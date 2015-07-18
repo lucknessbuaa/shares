@@ -20,6 +20,7 @@
 </head>
 <body>
     <div class="container">
+        <img class="logo" src="{{ STATIC_URL }}images/logo.png" />
         <button class="reset"></button>
         <div class="reset-text">重画</div>
         <canvas id="trend"></canvas>
@@ -48,7 +49,8 @@
     <div id="rank2" class="rank">
         <div class="rank-text1">天了噜！你是第<span>{{ count }}</span>位玩家，</div>
         <div class="rank-text2">你的股商<span id="credit2">分</span>！</div>
-        <div class="rank-text3">你是思想的巨人行动的矮子，速来老虎学院开启你的致富路。</div>
+        <div class="rank-text3">你是思想的巨人行动的矮子，</div>
+        <div class="rank-text3">速来老虎学院开启你的致富路。</div>
     </div>
     <div id="rank3" class="rank">
         <div class="rank-text1">天了噜！你是第<span>{{ count }}</span>位预测的玩家，</div>
