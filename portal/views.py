@@ -30,8 +30,15 @@ def index(request):
     avatar = social_user.extra_data['profile_image_url']
     
     datenow = datetime.datetime.now()
-
-    if datenow.hour >= 15:
+    week = int(datenow.strftime('%w'))
+   
+    if week == 6:
+        datenow = datenow + datetime.timedelta(days=2)
+    elif week == 0:
+        datenow = datenow + datetime.timedelta(days=1)
+    elif week == 5 and datenow.hour >= 15:
+        datenow = datenow + datetime.timedelta(days=3)
+    elif datenow.hour >= 15:
         datenow = datenow + datetime.timedelta(days=1)
     shares = Shares(user=user, imageurl='', info='', createon=datenow)
     count = Shares.objects.count() 
