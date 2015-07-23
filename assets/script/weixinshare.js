@@ -1,5 +1,5 @@
 function configWechat(shareData) {
-    $.get('/api/wechat/config', {
+    $.get('http://slide.cm/wechat/config', {
         url: location.href.split('#')[0]
     }).done(function(data) {
         if (data.code !== 0) {
@@ -7,10 +7,10 @@ function configWechat(shareData) {
         }
         wx.config({
             debug: false,
-            appId: data.appid,
-            timestamp: data.timestamp,
-            nonceStr: data.noncestr,
-            signature: data.signature,
+            appId: 'wx82a5d90838b461ba',
+            timestamp: data.config.timestamp,
+            nonceStr: data.config.nonceStr,
+            signature: data.config.signature,
             jsApiList: [
                 'onMenuShareTimeline',
                 'onMenuShareAppMessage',
