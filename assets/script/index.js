@@ -11,8 +11,6 @@ $(function() {
     var canvas = $('#trend')[0];
     var drawDatacopy;
     var drawData;
-    var penPos;
-    var minX;
     var touchDraw;
 
     var windowW = $(window).width();
@@ -34,28 +32,23 @@ $(function() {
     var eleTop;
     var eleLeft;
 
-    $.get('/api/getData', function(data) {
-    //$.get('/static/script/data.json', function(data) {
+    //$.get('/api/getData', function(data) {
+    $.get('/static/script/data.json', function(data) {
         drawDatacopy = data;
 
-        drawData = new DrawData(c, data, width, height);
-        penPos = {
-            'width': drawData.returnWidth,
-            'height': drawData.returnHeight
-        }
+        drawData = new DrawData(c, data, height);
         c.beginPath();
-        c.moveTo(windowW * penPos.width, height * penPos.height);
+        c.moveTo(0, 0);
         c.strokeStyle = "#ffe700";
-        eleTop = (0.545 + penPos.height * 0.2986 - 0.015) * windowH;
-        eleLeft = (0.0625 + penPos.width - 0.035) * windowW;
+        eleTop = (0.545 - 0.015) * windowH;
+        eleLeft = (0.0625 - 0.035) * windowW;
         $('.pen').css({
             'position': 'absolute',
             'left': eleLeft,
             'top': eleTop
         });
-        minX = (0.0625 + penPos.width) * windowW;
 
-        touchDraw = new TouchDraw(canvas, c, $('.pen'), $('.tip'), minX);
+        touchDraw = new TouchDraw(canvas, c, $('.pen'));
         touchDraw.init();
         
         var dataURL = canvas.toDataURL();
@@ -79,19 +72,18 @@ $(function() {
         c.translate(0, -height / 2);
         c.clearRect(0, 0, canvas.width, canvas.height);
         c.translate(0, height / 2);
-        drawData = new DrawData(c, drawDatacopy, width, height);
+        drawData = new DrawData(c, drawDatacopy, height);
         c.beginPath();
-        c.strokeStyle = "#ffe700";
-        c.moveTo(windowW * penPos.width, height * penPos.height);
+        c.moveTo(0, 0);
+        touchDraw.resetDraw();
         c.strokeStyle = "#ffe700";
         $('.pen').css({
             'position': 'absolute',
             'left': eleLeft,
             'top': eleTop
         });
-        touchDraw.minX = minX;
         
-        var dataURL = canvas.toDataURL();
+        /*var dataURL = canvas.toDataURL();
         var info = $('.idea').text();
         var id = $('#id').text();
 
@@ -101,7 +93,7 @@ $(function() {
             id: id
         }).fail(function(e) {
             console.log(e.responseText);
-        });
+        });*/
     });
 
     $('button.attention').click(function() {
