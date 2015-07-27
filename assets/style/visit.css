@@ -10,10 +10,17 @@ body {
     left: 0px;
     width: 100%;
     height: 100%;
-    background: url('/static/images/visitbg.jpg')0 0 no-repeat;
+    background: url('/static/images/visitbg.png')0 0 no-repeat;
     background-size: 100% 100%;
     overflow: hidden;
     opacity: 0;
+}
+
+.logo {
+    position: absolute;
+    top: 3.37%;
+    left: 7.34%;
+    height: 5.85%;
 }
 
 .text {
