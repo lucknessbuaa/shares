@@ -50,7 +50,7 @@ $(function() {
 
         touchDraw = new TouchDraw(canvas, c, $('.pen'));
         touchDraw.init();
-        
+
         var dataURL = canvas.toDataURL();
         var info = $('.idea').text();
         var id = $('#id').text();
@@ -82,7 +82,6 @@ $(function() {
             'left': eleLeft,
             'top': eleTop
         });
-        
         /*var dataURL = canvas.toDataURL();
         var info = $('.idea').text();
         var id = $('#id').text();
@@ -114,7 +113,7 @@ $(function() {
                 $('.share_text').velocity("fadeIn");
             }
         });
-        
+
         var dataURL = canvas.toDataURL();
         var info = $('.idea').val();
         var id = $('#id').text();
@@ -133,6 +132,15 @@ $(function() {
     });
 
     //pen animations
-    $('.circle1').velocity({opacity: 1}, {loop: true});
-    $('.circle2').velocity({scaleX: 1.8, scaleY: 1.8}, {loop: true});
+    $('.circle1').velocity({
+        opacity: 1
+    }, {
+        loop: true
+    });
+    $('.circle2').velocity({
+        scaleX: 1.8,
+        scaleY: 1.8
+    }, {
+        loop: true
+    });
 })
