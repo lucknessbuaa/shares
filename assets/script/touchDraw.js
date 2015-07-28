@@ -10,6 +10,7 @@ function TouchDraw(canvas, c, $pen) {
     this.minX = this.leftDis - 10;
     this.pageMinX = this.leftDis + 10;
     this.maxX = $(window).width() * 0.9375;
+    this.pageMaxX = canvas.width * 0.9;
     this.maxY = $(window).height() * 0.694;
     this.drawX = 0;
     this.drawY = 0;
@@ -55,7 +56,7 @@ TouchDraw.prototype.draw = function(event) {
 }
 
 TouchDraw.prototype.stopDraw = function(event) {
-    if (this.drawStatus) {
+    if (this.drawStatus && this.drawX > this.pageMaxX) {
         var rankid = Math.floor(Math.random() * 2 + 1);
         var id;
         var count = parseInt(this.drawY);
