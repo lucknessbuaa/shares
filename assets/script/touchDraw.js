@@ -58,17 +58,17 @@ TouchDraw.prototype.draw = function(event) {
 TouchDraw.prototype.stopDraw = function(event) {
     if (this.drawStatus && this.drawX > this.pageMaxX) {
         var rankid = Math.floor(Math.random() * 2 + 1);
-        var id;
+        var textid;
         var count = parseInt(this.drawY);
 
         if (count < 0) {
-            id = '#esc' + rankid;
+            textid = '#esc' + rankid;
         } else if (count > 0) {
-            id = '#desc' + rankid;
+            textid = '#desc' + rankid;
         } else {
-            id = '#eq' + rankid;
+            textid = '#eq' + rankid;
         }
-        $(id).velocity("fadeIn");
+        $(textid).velocity("fadeIn");
 
         var dataURL = this.canvas.toDataURL();
         var info = $('.idea').val();
@@ -78,10 +78,22 @@ TouchDraw.prototype.stopDraw = function(event) {
             dataURL: dataURL,
             info: info,
             id: id
-        }, function(){
+        }, function() {
             console.log('success');
         }).fail(function(e) {
             console.log(e.responseText);
+        });
+
+        var sharedesc = '';
+        var $shareid = $(textid).children();
+        for(var i = 0; i < $shareid.length; i++){
+            sharedesc += $shareid.eq(i).text();
+        }
+        configWechat({
+            'title': '城会玩|你适合炒股吗？快来测测你的股商！',
+            'desc': sharedesc,
+            'imgUrl': $('#avatar').text(),
+            'link': 'http://' + window.location.hostname + '/share/' + $('#id').text()
         });
     }
 }

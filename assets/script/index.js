@@ -32,8 +32,8 @@ $(function() {
     var eleTop;
     var eleLeft;
 
-    //$.get('/api/getData', function(data) {
-    $.get('/static/script/data.json', function(data) {
+    $.get('/api/getData', function(data) {
+    //$.get('/static/script/data.json', function(data) {
         drawDatacopy = data;
 
         drawData = new DrawData(c, data, height);
@@ -102,7 +102,6 @@ $(function() {
 
     configWechat({
         'title': '城会玩|你适合炒股吗？快来测测你的股商！',
-        'desc': 'A股大盘震荡，深V调整，一起来当神笔马良。' + $('#username').text() + '预测了' + $('#date').text() + '的大盘走势。。。',
         'imgUrl': $('#avatar').text(),
         'link': 'http://' + window.location.hostname + '/share/' + $('#id').text()
     });
