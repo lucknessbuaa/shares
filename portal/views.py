@@ -22,10 +22,10 @@ def login(request):
     url = '/login/weixin?next=' + next
     return redirect(url)
 
-@login_required
+#@login_required
 def index(request):
-    user = request.user
-    #user = User.objects.get(id=1)
+    #user = request.user
+    user = User.objects.get(id=1)
     social_user = UserSocialAuth.objects.get(user_id=user.id)
     username = social_user.extra_data['username']
     avatar = social_user.extra_data['profile_image_url']
