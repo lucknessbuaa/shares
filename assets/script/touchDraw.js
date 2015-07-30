@@ -84,11 +84,21 @@ TouchDraw.prototype.stopDraw = function(event) {
             console.log(e.responseText);
         });
 
-        var sharedesc = '';
-        var $shareid = $(textid).children();
-        for(var i = 0; i < $shareid.length; i++){
-            sharedesc += $shareid.eq(i).text();
+        var sharedesc = $('#username').text() + '预测了' + $('#date').text() + '的大盘走势：';
+        if(textid == '#esc1') {
+            sharedesc += '哇靠！起死回生的“国家队”来了！';
+        }else if(textid == '#esc2') {
+            sharedesc += '你这可怜的小散，说好的不哭呢？';
+        }else if(textid == '#desc1') {
+            sharedesc += '这不是8年身价过亿的小股神么？';
+        }else if(textid == '#desc2') {
+            sharedesc += '跟看空大师格罗斯很像哦！';
+        }else if(textid == '#eq1') {
+            sharedesc += '地球上真有这样呆萌的学院派，哦买噶！';
+        }else if(textid == '#eq2') {
+            sharedesc += '这是心电图吗？会出人命的啦！';
         }
+
         configWechat({
             'title': '城会玩|你适合炒股吗？快来测测你的股商！',
             'desc': sharedesc,
